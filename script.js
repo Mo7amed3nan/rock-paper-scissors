@@ -11,6 +11,7 @@ document.querySelector('.buttons .scissors').innerHTML = r_p_s[2];
 const userChoiceE = document.querySelector('.choice .user-choice p');
 const computerChoiceE = document.querySelector('.choice .computer-choice p');
 
+const buttonsE = document.querySelector('.buttons');
 const rockButtonE = document.querySelector('.buttons .rock');
 const paperButtonE = document.querySelector('.buttons .paper');
 const scissorsButtonE = document.querySelector('.buttons .scissors');
@@ -36,6 +37,11 @@ function getComputerChoice(){
 
 let userChoice = 3;
 let computerChoice = 3;
+
+[...buttonsE.children].forEach((element, idx) => {
+  const keys = ['r', 'p', 's'];
+  element.setAttribute('title', `Press ${keys[idx]} on Keyboard`);
+});
 
 rockButtonE.addEventListener('click', ()=>handleChoice(0));
 
@@ -121,10 +127,24 @@ function showFinalWinner(w){
 }
 
 function forcePlayAgain(){
-    rockButtonE.disabled = paperButtonE.disabled 
+  rockButtonE.disabled = paperButtonE.disabled 
     = scissorsButtonE.disabled = true;
+  
+  /** here buttonsE children are HTML collection (not array that has method as: forEach) **/
+  /** so Array.from(HTML collection) changes this object to an array type **/
+  [...buttonsE.children].forEach(element => {
+    element.removeAttribute('title');
+  });
+  
+  // children = buttonsE.children;
+  // for(let i = 0; i < children.length; i++){
+  //   let element = children[i];
+  //   element.removeAttribute('title');
+  // }
   playAgainE.disabled = false;
+  playAgainE.setAttribute('title', 'Press Enter on Keyboard');
 }
+
 
 function resetAll(){
   userScore = 0;
@@ -141,7 +161,22 @@ function resetAll(){
   showWinner();
   rockButtonE.disabled = paperButtonE.disabled 
   = scissorsButtonE.disabled = false;
+  [...buttonsE.children].forEach((element, idx) => {
+  const keys = ['r', 'p', 's'];
+  element.setAttribute('title', `Press ${keys[idx]} on Keyboard`);
+  });
+
   playAgainE.disabled = true;
+  playAgainE.removeAttribute('title');
 }
 
 playAgainE.addEventListener('click', resetAll);
+
+document.querySelector('body').addEventListener('keydown', (e)=>{
+  if(e.key === 'Enter' && !playAgainE.disabled) resetAll();
+  if(rockButtonE.disabled) return;
+  if(e.key === 'r') handleChoice(0);
+  else if(e.key === 'p') handleChoice(1);
+  else if(e.key === 's') handleChoice(2);
+});
+
