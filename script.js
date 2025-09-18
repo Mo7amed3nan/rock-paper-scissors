@@ -1,7 +1,6 @@
 
 let userScore = 0, computerScore = 0;
-let ties = 0; const rounds = 5;
-const winningStates = [{a: 0, b: 2}, {a: 1, b: 0}, {a: 2, b: 1}];
+let ties = 0; let targetScore = 5;
 
 const r_p_s = ['✊', '✋', '✌️', '❓'];
 
@@ -12,7 +11,6 @@ document.querySelector('.buttons .scissors').innerHTML = r_p_s[2];
 const userChoiceE = document.querySelector('.choice .user-choice p');
 const computerChoiceE = document.querySelector('.choice .computer-choice p');
 
-const buttonsContainerE = document.querySelector('.buttons');
 const rockButtonE = document.querySelector('.buttons .rock');
 const paperButtonE = document.querySelector('.buttons .paper');
 const scissorsButtonE = document.querySelector('.buttons .scissors');
@@ -25,6 +23,8 @@ const descriptionE = document.querySelector('.result .description p');
 const finalWinnerE = document.querySelector('.final-winner p');
 
 const playAgainE = document.querySelector('.play-again .button');
+playAgainE.disabled = true;
+
 function getRandom(n){
   return Math.floor(Math.random() * n);
 }
@@ -37,17 +37,11 @@ function getComputerChoice(){
 let userChoice = 3;
 let computerChoice = 3;
 
-function handleClick(e) {
-  if (e.target.classList.contains('rock')) {
-    handleChoice(0);
-  } else if (e.target.classList.contains('paper')) {
-    handleChoice(1);
-  } else if (e.target.classList.contains('scissors')) {
-    handleChoice(2);
-  }
-}
+rockButtonE.addEventListener('click', ()=>handleChoice(0));
 
-buttonsContainerE.addEventListener('click', handleClick);
+paperButtonE.addEventListener('click', ()=>handleChoice(1));
+
+scissorsButtonE.addEventListener('click', ()=>handleChoice(2));
 
 function showUserChoice(){
   userChoiceE.innerHTML = r_p_s[userChoice];
@@ -56,6 +50,7 @@ function showUserChoice(){
 function showComputerChoice(){
   computerChoiceE.innerHTML = r_p_s[computerChoice];
 }
+const winningStates = [{a: 0, b: 2}, {a: 1, b: 0}, {a: 2, b: 1}];
 
 showUserChoice(userChoice);
 showComputerChoice(computerChoice);
@@ -114,7 +109,7 @@ function playRound(){
   console.log(winner);
   showUserScore();
   showComputerScore();
-  if(userScore === rounds || computerScore === rounds){
+  if(userScore === targetScore || computerScore === targetScore){
     showFinalWinner(winner);
     forcePlayAgain();
   }
@@ -126,10 +121,9 @@ function showFinalWinner(w){
 }
 
 function forcePlayAgain(){
-  // rockButtonE.removeEventListener('click', handleChoice(0));
-  // paperButtonE.removeEventListener('click', handleChoice(1));
-  // scissorsButtonE.removeEventListener('click', handleChoice(2));
-  buttonsContainerE.removeEventListener('click', handleClick);
+    rockButtonE.disabled = paperButtonE.disabled 
+    = scissorsButtonE.disabled = true;
+  playAgainE.disabled = false;
 }
 
 function resetAll(){
@@ -145,7 +139,8 @@ function resetAll(){
   showUserScore();
   showDescription();
   showWinner();
-  buttonsContainerE.addEventListener('click', handleClick);
+  rockButtonE.disabled = paperButtonE.disabled 
+  = scissorsButtonE.disabled = false;
 }
 
 playAgainE.addEventListener('click', resetAll);
