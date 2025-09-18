@@ -1,5 +1,139 @@
 *{
   box-sizing: border-box;
-  margin: 5px;
+  margin: 0;
   padding: 0;
+}
+
+body{
+  background-color: #222831;
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+button{
+  cursor: pointer;
+}
+
+.header{
+  display: flex;
+  height: 20vh;
+  background-color: rgb(14, 9, 40);
+  align-items: center;
+  justify-content: center;
+}
+
+.header h1{
+  padding: 0;
+  margin: 0;
+  font-weight: bold;
+  font-family: "Press Start 2P";
+  font-size: 8vh;
+  color: rgb(188, 188, 3);
+}
+
+.status{
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  align-items: center;
+  justify-content: center;
+  height: 15vh;
+  justify-content: flex-end;
+}
+
+.player-status{
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 5em;
+  height: 10vh;
+}
+
+.player-status p{
+  font-size: 1.2em;
+}
+
+.choice{
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 5em;
+  height: 20vh;
+}
+
+.choice p{
+  font-size: 10vh;
+}
+
+.buttons{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 3em;
+  padding: 5vh 0;
+}
+
+.buttons > *{
+  width: 15vh;
+  height: 15vh;
+  font-size: 10vh;
+  border: 1px solid white;
+  /* background-color: #222831; */
+  background-color: transparent;
+  border-radius: 50%;
+  
+}
+
+.final-winner, 
+.play-again{
+  height: 5vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.play-again button{
+  padding: 10px 20px;
+  color: white;
+  border: 1px solid white;
+  border-radius: 20px;
+}
+
+.play-again button:enabled{
+  background-color: rgb(147, 7, 7);
+
+}
+.play-again button:disabled{
+  background-color: rgb(90, 44, 44);
+  color: grey;
+  border: grey;
+}
+
+.footer{
+  background-color: rgb(14, 9, 40);
+  height: 7vh;
+  color: rgb(150, 150, 150);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2vh;
+  margin-top: 2vh;
+}
+
+.footer img{
+  max-width: 4vh;
+  transition: transform 0.3s ease-in-out;
+}
+
+.footer img:hover{
+  transform: rotate(360deg) scale(1.2);
+}
+
+button:enabled:hover{
+  transform: scale(1.1);
+}
+
+button:disabled{
+  cursor: auto;
 }

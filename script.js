@@ -141,7 +141,7 @@ function resetAll(){
   showWinner();
   rockButtonE.disabled = paperButtonE.disabled 
   = scissorsButtonE.disabled = false;
+  playAgainE.disabled = true;
 }
 
 playAgainE.addEventListener('click', resetAll);
-
