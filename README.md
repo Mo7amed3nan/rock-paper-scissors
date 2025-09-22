@@ -1,0 +1,1 @@
+Rock Paper Scissors project created using HTML, CSS and JS and a part of the Odin Project in learning events and some basics in JS, the project on web page link :  https://rock-paper-scissors-eta-murex.vercel.app/
